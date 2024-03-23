@@ -38,3 +38,10 @@ jobs:
      - name: application directory
        run: ls -R
        working-directory: ${{env.working-directory-pub}}
+     
+     - name: Set env
+       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+     - name: Test
+       run: |
+          echo $RELEASE_VERSION
+          echo ${{ env.RELEASE_VERSION }}
