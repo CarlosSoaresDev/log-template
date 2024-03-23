@@ -55,7 +55,6 @@ jobs:
     - name: Unit Test
       run: dotnet test --no-build --verbosity normal
       working-directory: ${{env.working-directory}}
-
   
   publish:
     name: Publish on nugget       
@@ -69,4 +68,4 @@ jobs:
 
      - name: application directory
        run: ls -R
-       working-directory: ${{env.worker-directory}}/src/bin  
+       working-directory: ${{working-directory-pub}}
