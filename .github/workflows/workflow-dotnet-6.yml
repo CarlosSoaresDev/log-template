@@ -2,7 +2,7 @@ name: Push lib to nuget
 
 env:
   WORKING-DIRECTORY:  ./dotnet-6  
-  WORKING-DIRECTORY-PUB: ./dotnet-6/src/LogTemplate/bin
+  WORKING-DIRECTORY-PUB: ./dotnet-6/src/LogTemplate/bin/Debug
 
 on:
   push:
