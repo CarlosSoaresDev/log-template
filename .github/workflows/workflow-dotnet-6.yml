@@ -50,7 +50,7 @@ jobs:
 
     - name: Unit Test
       run: dotnet test --no-build --verbosity normal
-      working-directory: ${{env.env.working-directory}}
+      working-directory: ${{env.working-directory}}
 
   
   publish:
@@ -63,6 +63,6 @@ jobs:
      - name: Checkout
        uses: actions/checkout@master 
 
-     - name: root directory
+     - name: application directory
        run: ls -R
-       working-directory: ${{env.worker-directory-root}}         
+       working-directory: ${{env.worker-directory}}/src/bin  
