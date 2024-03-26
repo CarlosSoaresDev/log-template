@@ -49,8 +49,8 @@ namespace LogTemplateApplication.Controllers
             {
                 _logger.EndLogError(new TemplateError
                 {
-                    Title = "Processamento finalizado",
-                    Description = "Sem detalhe",
+                    Title = "Finished Process",
+                    Description = "No details",
                     MessageErro = ex.Message,
                     StackTrace = ex.StackTrace
                 });
