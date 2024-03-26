@@ -1,0 +1,46 @@
+name: Push lib to nuget
+
+env:
+  WORKING-DIRECTORY:  ./dotnet-3.1
+  WORKING-DIRECTORY-PUB: ./dotnet-3.1/src/LogTemplate/bin/Debug
+
+on:
+  push:
+    tags:
+      - '3.[0-9]+.[0-9]+'
+
+jobs:    
+  build_and_publish:
+    name: build_and_publish      
+    runs-on: ubuntu-latest
+    steps:  
+     - name: Checkout
+       uses: actions/checkout@master 
+
+     - name: Setup .NET      
+       uses: actions/setup-dotnet@v3
+       with:
+        dotnet-version: 3.1.x
+
+     - name: Restore dependencies
+       run: dotnet restore
+       working-directory: ${{env.WORKING-DIRECTORY}}    
+
+     - name: Build
+       run: dotnet build --no-restore
+       working-directory: ${{env.WORKING-DIRECTORY}}
+
+     - name: Unit Test
+       run: dotnet test --no-build --verbosity normal
+       working-directory: ${{env.WORKING-DIRECTORY}}
+
+     - name: application directory
+       run: ls -R
+       working-directory: ${{env.WORKING-DIRECTORY-PUB}}
+     
+     - name: Set tag env
+       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+     
+     - name: Publish
+       run: dotnet nuget push LogTemplate.${{env.RELEASE_VERSION}}.nupkg --api-key ${{secrets.NUGET_KEY}} --source https://api.nuget.org/v3/index.json
+       working-directory: ${{env.WORKING-DIRECTORY-PUB}}
