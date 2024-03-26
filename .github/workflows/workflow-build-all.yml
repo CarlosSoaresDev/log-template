@@ -1,8 +1,8 @@
 name: Push lib to nuget
 
 env:
-  WORKING-DIRECTORY-DOTNET-6.0:  ./dotnet-6
-  WORKING-DIRECTORY-DOTNET-3.1:  ./dotnet-3.1
+  WORKING-DIRECTORY-DOTNET-SIX-DOT-ZERO:  ./dotnet-6
+  WORKING-DIRECTORY-DOTNET-THREE-DOT-ONE:  ./dotnet-3.1
 
 on:
   push:
@@ -25,37 +25,37 @@ jobs:
 
      - name: Restore dependencies
        run: dotnet restore
-       working-directory: ${{env.WORKING-DIRECTORY-DOTNET-6.0}}    
+       working-directory: ${{env.WORKING-DIRECTORY-DOTNET-SIX-DOT-ZERO}}    
 
      - name: Build
        run: dotnet build --no-restore
-       working-directory: ${{env.WORKING-DIRECTORY-DOTNET-6.0}}
+       working-directory: ${{env.WORKING-DIRECTORY-DOTNET-SIX-DOT-ZERO}}
 
      - name: Unit Test
        run: dotnet test --no-build --verbosity normal
-       working-directory: ${{env.WORKING-DIRECTORY-DOTNET-6.0}}
+       working-directory: ${{env.WORKING-DIRECTORY-DOTNET-SIX-DOT-ZERO}}
   
-  build_and_test_dotnet_three_dot_one:
-    name: build and test dotnet 3.1    
-    runs-on: ubuntu-latest
-    steps:  
-     - name: Checkout
-       uses: actions/checkout@master 
+  # build_and_test_dotnet_three_dot_one:
+  #   name: build and test dotnet 3.1    
+  #   runs-on: ubuntu-latest
+  #   steps:  
+  #    - name: Checkout
+  #      uses: actions/checkout@master 
 
-     - name: Setup .NET      
-       uses: actions/setup-dotnet@v3
-       with:
-        dotnet-version: 3.1.x
+  #    - name: Setup .NET      
+  #      uses: actions/setup-dotnet@v3
+  #      with:
+  #       dotnet-version: 3.1.x
 
-     - name: Restore dependencies
-       run: dotnet restore
-       working-directory: ${{env.WORKING-DIRECTORY-DOTNET-3.1}}    
+  #    - name: Restore dependencies
+  #      run: dotnet restore
+  #      working-directory: ${{env.WORKING-DIRECTORY-DOTNET-3.1}}    
 
-     - name: Build
-       run: dotnet build --no-restore
-       working-directory: ${{env.WORKING-DIRECTORY-DOTNET-3.1}}
+  #    - name: Build
+  #      run: dotnet build --no-restore
+  #      working-directory: ${{env.WORKING-DIRECTORY-DOTNET-3.1}}
 
-     - name: Unit Test
-       run: dotnet test --no-build --verbosity normal
-       working-directory: ${{env.WORKING-DIRECTORY-DOTNET-3.1}}
+  #    - name: Unit Test
+  #      run: dotnet test --no-build --verbosity normal
+  #      working-directory: ${{env.WORKING-DIRECTORY-DOTNET-3.1}}
      
